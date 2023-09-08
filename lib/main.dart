@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vansales/constants.dart';
+import 'package:vansales/application/login/login_bloc.dart';
+import 'package:vansales/core/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'screens/login/login_screen.dart';
+import 'domain/core/di/injectable.dart';
+import 'presentation/login/login_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureInjection();
   runApp(const MyApp());
 }
 
@@ -13,12 +18,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'VanSales',
-      theme: ThemeData(
-          primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-      home: const LoginScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (ctx) => getIt<LoginBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'VanSales',
+        theme: ThemeData(
+            primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
+        home: const LoginScreen(),
+      ),
     );
   }
 }
