@@ -5,19 +5,19 @@ part 'stock_response.g.dart';
 @JsonSerializable()
 class StockResponse {
   @JsonKey(name: 'StockId')
-  int? stockId;
+  double? stockId;
   @JsonKey(name: 'ItemId')
-  int? itemId;
+  double? itemId;
   @JsonKey(name: 'ItemNo')
   String? itemNo;
   @JsonKey(name: 'ItemName')
   String? itemName;
   @JsonKey(name: 'ItemUnitId')
-  int? itemUnitId;
+  double? itemUnitId;
   @JsonKey(name: 'ItemUnitShortName')
   String? itemUnitShortName;
   @JsonKey(name: 'BranchId')
-  int? branchId;
+  double? branchId;
   @JsonKey(name: 'BranchName')
   String? branchName;
   @JsonKey(name: 'PurchaseQty')
@@ -27,29 +27,29 @@ class StockResponse {
   @JsonKey(name: 'ExpiryQty')
   double? expiryQty;
   @JsonKey(name: 'PurchaseRetQty')
-  int? purchaseRetQty;
+  double? purchaseRetQty;
   @JsonKey(name: 'SaleRetQty')
-  int? saleRetQty;
+  double? saleRetQty;
   @JsonKey(name: 'TransferInQty')
-  int? transferInQty;
+  double? transferInQty;
   @JsonKey(name: 'TransferOutQty')
-  int? transferOutQty;
+  double? transferOutQty;
   @JsonKey(name: 'AvgCostPrice')
   double? avgCostPrice;
   @JsonKey(name: 'MinSalePrice')
   double? minSalePrice;
   @JsonKey(name: 'UpdatedBy')
-  int? updatedBy;
+  double? updatedBy;
   @JsonKey(name: 'UpdatedOn')
   String? updatedOn;
   @JsonKey(name: 'CleanOutQty')
   double? cleanOutQty;
   @JsonKey(name: 'CleanInQty')
-  int? cleanInQty;
+  double? cleanInQty;
   @JsonKey(name: 'StockQty')
   double? stockQty;
   @JsonKey(name: 'ReOrderQty')
-  int? reOrderQty;
+  double? reOrderQty;
 
   StockResponse({
     this.stockId,

@@ -7,9 +7,8 @@ import 'package:vansales/domain/core/api_endpoints.dart';
 import 'package:vansales/domain/core/failures/main_failure.dart';
 import 'package:vansales/domain/home/home_service.dart';
 import 'package:vansales/domain/home/model/userinfo_response/userinfo_response.dart';
-import 'package:vansales/domain/login/login_service.dart';
 
-@LazySingleton(as: LoginService)
+@LazySingleton(as: HomeService)
 class HomeImpl implements HomeService {
   @override
   Future<Either<MainFailure, UserinfoResponse>> userInformation(

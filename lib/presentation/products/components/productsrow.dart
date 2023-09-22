@@ -1,13 +1,29 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:vansales/domain/db/model/product_model.dart';
+import 'package:vansales/domain/stock/model/stock_response/stock_response.dart';
+import 'package:vansales/presentation/cart/Cart.dart';
 
 import '../../../core/constants.dart';
+import '../../../domain/db/function/db_functions.dart';
 import '../../components/roundedbutton.dart';
-import '../../home/home.dart';
 
+// ignore: must_be_immutable
 class ProductsRow extends StatelessWidget {
-  const ProductsRow({
-    super.key,
-  });
+  List<StockResponse> stockresponse;
+  TextEditingController countController;
+  int index;
+  // const ProductsRow(
+  //   List<StockResponse> stockresponse, {
+  //   super.key,
+  // });
+
+  ProductsRow(
+      {Key? key,
+      required this.stockresponse,
+      required this.index,
+      required this.countController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +40,19 @@ class ProductsRow extends StatelessWidget {
               child: Image.asset("assets/images/fish.png"),
             ),
             SizedBox(
-              width: size.width * 0.12,
-              height: size.width * 0.12,
+              width: size.width * 0.2,
+              height: size.width * 0.10,
               child: TextField(
+                maxLines: 1,
+                maxLength: 5,
+                controller: countController,
                 onChanged: (text) {},
                 textAlign: TextAlign.center,
-                decoration: const InputDecoration(border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.all(5),
+                    counterText: '',
+                    isDense: true),
               ),
             ),
           ],
@@ -44,24 +67,48 @@ class ProductsRow extends StatelessWidget {
             width: double.infinity,
             alignment: Alignment.topLeft,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Expanded(
+                Expanded(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("data"),
-                      Text("data"),
-                      Text("data"),
+                      Text(
+                        stockresponse[index].itemName.toString(),
+                        maxLines: 1,
+                      ),
+                      Text("Total Qty/${stockresponse[index].saleQty}"),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text("AED ${stockresponse[index].minSalePrice}"),
                     ],
                   ),
                 ),
                 RoundedButton(
-                  text: "Login",
+                  text: "Add to Cart",
                   press: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                    try {
+                      getProducts().singleWhere((obj) =>
+                          obj.id == stockresponse[index].itemId.toString());
+                      getProducts()[index].count =
+                          countController.value.toString();
+                    } catch (e) {
+                      addProduct(ProductModel(
+                          id: stockresponse[index].itemId.toString(),
+                          count: countController.value.text.toString(),
+                          name: stockresponse[index].itemName.toString(),
+                          price: stockresponse[index].minSalePrice.toString()));
+                    }
+
+                    print("countval${countController.value.text}");
+
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Cart()));
+                    });
                   },
                   color: kPrimaryColor,
                   textcolor: Colors.white,
@@ -69,7 +116,7 @@ class ProductsRow extends StatelessWidget {
                   marginvertical: 0,
                   borderRadius: 10,
                   horizontalPadding: 10,
-                  verticalPadding: 15,
+                  verticalPadding: 5,
                 ),
               ],
             ),

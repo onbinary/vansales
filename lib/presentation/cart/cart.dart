@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vansales/presentation/products/components/body.dart';
+import 'package:vansales/presentation/cart/components/body.dart';
 
-class Products extends StatelessWidget {
-  const Products({super.key});
+class Cart extends StatelessWidget {
+  const Cart({super.key});
 
   @override
   Widget build(BuildContext context) {

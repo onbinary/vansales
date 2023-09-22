@@ -40,7 +40,7 @@ dependencies:
   json_annotation: 
   json_serializable: 
   dartz: 
-  hive_flutter: 
+  hive: ^2.2.3 
   
   
 

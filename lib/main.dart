@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vansales/application/acceptstock/acceptstock_bloc.dart';
+import 'package:vansales/application/home/home_bloc_bloc.dart';
 import 'package:vansales/application/login/login_bloc.dart';
+import 'package:vansales/application/stock/stock_bloc.dart';
 import 'package:vansales/core/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +26,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (ctx) => getIt<LoginBloc>(),
         ),
+        BlocProvider(
+          create: (ctx) => getIt<HomeBlocBloc>(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<StockBloc>(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<AcceptstockBloc>(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

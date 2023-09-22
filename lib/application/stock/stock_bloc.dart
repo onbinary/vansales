@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:vansales/domain/core/failures/main_failure.dart';
 import 'package:vansales/domain/stock/model/stock_response/stock_response.dart';
 import 'package:vansales/domain/stock/stock_service.dart';
@@ -9,6 +10,7 @@ part 'stock_event.dart';
 part 'stock_state.dart';
 part 'stock_bloc.freezed.dart';
 
+@injectable
 class StockBloc extends Bloc<StockEvent, StockState> {
   final StockService _stockservice;
 
@@ -20,7 +22,7 @@ class StockBloc extends Bloc<StockEvent, StockState> {
             isServerError: false,
             isClientError: false,
             isAuthError: false,
-            stockresponse: null),
+            stockresponse: []),
       );
     });
 
@@ -31,7 +33,7 @@ class StockBloc extends Bloc<StockEvent, StockState> {
             isServerError: false,
             isClientError: false,
             isAuthError: false,
-            stockresponse: null),
+            stockresponse: []),
       );
 
       final result = await _stockservice.getStock(
@@ -46,17 +48,17 @@ class StockBloc extends Bloc<StockEvent, StockState> {
                 isServerError: false,
                 isClientError: true,
                 isAuthError: false,
-                stockresponse: null);
+                stockresponse: []);
           } else {
             return const StockState(
                 isLoading: false,
                 isServerError: true,
                 isClientError: false,
                 isAuthError: false,
-                stockresponse: null);
+                stockresponse: []);
           }
         },
-        (StockResponse response) {
+        (List<StockResponse> response) {
           return StockState(
               isLoading: false,
               isServerError: true,

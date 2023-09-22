@@ -6,11 +6,10 @@ import 'package:injectable/injectable.dart';
 import 'package:vansales/domain/core/api_endpoints.dart';
 import 'package:vansales/domain/core/failures/main_failure.dart';
 import 'package:vansales/domain/stock/model/stock_response/stock_response.dart';
-import 'package:vansales/domain/stock/stock_service.dart';
 
 import '../../domain/stockaccept/stock_accept_service.dart';
 
-@LazySingleton(as: StockService)
+@LazySingleton(as: StockAcceptService)
 class StockAcceptImpl implements StockAcceptService {
   @override
   Future<Either<MainFailure, StockResponse>> getStockAccept(

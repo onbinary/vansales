@@ -1,8 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
+@HiveType(typeId: 1)
 class ProductModel {
-  final String id;
-  final String count;
+  @HiveField(0)
+  String id;
+  @HiveField(1)
+  String count;
+  @HiveField(2)
+  String name;
+  @HiveField(3)
+  String price;
 
-  ProductModel({required this.id, required this.count});
+  ProductModel(
+      {required this.id,
+      required this.count,
+      required this.name,
+      required this.price});
 }

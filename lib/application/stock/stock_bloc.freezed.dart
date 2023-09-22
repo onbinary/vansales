@@ -346,7 +346,7 @@ mixin _$StockState {
   bool get isServerError => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isAuthError => throw _privateConstructorUsedError;
-  StockResponse? get stockresponse => throw _privateConstructorUsedError;
+  List<StockResponse> get stockresponse => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $StockStateCopyWith<StockState> get copyWith =>
@@ -364,7 +364,7 @@ abstract class $StockStateCopyWith<$Res> {
       bool isServerError,
       bool isClientError,
       bool isAuthError,
-      StockResponse? stockresponse});
+      List<StockResponse> stockresponse});
 }
 
 /// @nodoc
@@ -384,7 +384,7 @@ class _$StockStateCopyWithImpl<$Res, $Val extends StockState>
     Object? isServerError = null,
     Object? isClientError = null,
     Object? isAuthError = null,
-    Object? stockresponse = freezed,
+    Object? stockresponse = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -403,10 +403,10 @@ class _$StockStateCopyWithImpl<$Res, $Val extends StockState>
           ? _value.isAuthError
           : isAuthError // ignore: cast_nullable_to_non_nullable
               as bool,
-      stockresponse: freezed == stockresponse
+      stockresponse: null == stockresponse
           ? _value.stockresponse
           : stockresponse // ignore: cast_nullable_to_non_nullable
-              as StockResponse?,
+              as List<StockResponse>,
     ) as $Val);
   }
 }
@@ -424,7 +424,7 @@ abstract class _$$_StockStateCopyWith<$Res>
       bool isServerError,
       bool isClientError,
       bool isAuthError,
-      StockResponse? stockresponse});
+      List<StockResponse> stockresponse});
 }
 
 /// @nodoc
@@ -442,7 +442,7 @@ class __$$_StockStateCopyWithImpl<$Res>
     Object? isServerError = null,
     Object? isClientError = null,
     Object? isAuthError = null,
-    Object? stockresponse = freezed,
+    Object? stockresponse = null,
   }) {
     return _then(_$_StockState(
       isLoading: null == isLoading
@@ -461,10 +461,10 @@ class __$$_StockStateCopyWithImpl<$Res>
           ? _value.isAuthError
           : isAuthError // ignore: cast_nullable_to_non_nullable
               as bool,
-      stockresponse: freezed == stockresponse
-          ? _value.stockresponse
+      stockresponse: null == stockresponse
+          ? _value._stockresponse
           : stockresponse // ignore: cast_nullable_to_non_nullable
-              as StockResponse?,
+              as List<StockResponse>,
     ));
   }
 }
@@ -477,7 +477,8 @@ class _$_StockState with DiagnosticableTreeMixin implements _StockState {
       required this.isServerError,
       required this.isClientError,
       required this.isAuthError,
-      required this.stockresponse});
+      required final List<StockResponse> stockresponse})
+      : _stockresponse = stockresponse;
 
   @override
   final bool isLoading;
@@ -487,8 +488,13 @@ class _$_StockState with DiagnosticableTreeMixin implements _StockState {
   final bool isClientError;
   @override
   final bool isAuthError;
+  final List<StockResponse> _stockresponse;
   @override
-  final StockResponse? stockresponse;
+  List<StockResponse> get stockresponse {
+    if (_stockresponse is EqualUnmodifiableListView) return _stockresponse;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stockresponse);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -520,13 +526,18 @@ class _$_StockState with DiagnosticableTreeMixin implements _StockState {
                 other.isClientError == isClientError) &&
             (identical(other.isAuthError, isAuthError) ||
                 other.isAuthError == isAuthError) &&
-            (identical(other.stockresponse, stockresponse) ||
-                other.stockresponse == stockresponse));
+            const DeepCollectionEquality()
+                .equals(other._stockresponse, _stockresponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isServerError,
-      isClientError, isAuthError, stockresponse);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isServerError,
+      isClientError,
+      isAuthError,
+      const DeepCollectionEquality().hash(_stockresponse));
 
   @JsonKey(ignore: true)
   @override
@@ -541,7 +552,7 @@ abstract class _StockState implements StockState {
       required final bool isServerError,
       required final bool isClientError,
       required final bool isAuthError,
-      required final StockResponse? stockresponse}) = _$_StockState;
+      required final List<StockResponse> stockresponse}) = _$_StockState;
 
   @override
   bool get isLoading;
@@ -552,7 +563,7 @@ abstract class _StockState implements StockState {
   @override
   bool get isAuthError;
   @override
-  StockResponse? get stockresponse;
+  List<StockResponse> get stockresponse;
   @override
   @JsonKey(ignore: true)
   _$$_StockStateCopyWith<_$_StockState> get copyWith =>

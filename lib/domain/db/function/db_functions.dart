@@ -5,3 +5,7 @@ List<ProductModel> productsList = [];
 void addProduct(ProductModel value) {
   productsList.add(value);
 }
+
+List<ProductModel> getProducts() {
+  return productsList;
+}
